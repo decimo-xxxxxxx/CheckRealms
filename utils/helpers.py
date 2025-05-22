@@ -18,7 +18,7 @@ def get_last_day_of_month():
     """今月の月末日を datetime.date で返す"""
     now = datetime.now(pytz.timezone('Asia/Tokyo'))
     #last_day = now + relativedelta(day=31)
-    last_day = now + timedelta(day=2)
+    last_day = now + timedelta(days=2)
     return last_day.date()
 
 async def send_initial_message(bot, user):
