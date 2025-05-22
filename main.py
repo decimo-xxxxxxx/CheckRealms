@@ -73,10 +73,11 @@ class RealmBot(commands.Bot):
             
         )
         
+        tz  = pytz.timezone("Asia/Tokyo")
+        now = datetime.now(tz)
         
         # ---------- 開発モードだけテスト用ジョブを追加 ----------
         if CONFIG.get("ENV") == "development":
-            now = datetime.now(pytz.timezone("Asia/Tokyo"))
             channel = self.get_channel(CONFIG["TARGET_CHANNEL"])
             if channel:
                 members = [
@@ -122,7 +123,7 @@ class RealmBot(commands.Bot):
             # notify_admin は、send_initial_message 後にユーザーがリアクションを付けることで発動
             # そのため単独でジョブ化せず、実際にリアクション操作をして確認します。
 
-        # （必要ならここで get_jobs() を print してログに出す）
+        #  get_jobs() ログに出す
         for job in self.scheduler.get_jobs():
             print(f"[SCHEDULED] {job.id} → next run at {job.next_run_time}")
             
