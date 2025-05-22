@@ -14,6 +14,9 @@ import pytz
 # 通知コマンド
 from commands import notification_commands
 
+tz  = pytz.timezone("Asia/Tokyo")
+now = datetime.now(tz)
+
 class RealmBot(commands.Bot):
     def __init__(self):
         intents = Intents.default()
@@ -73,8 +76,6 @@ class RealmBot(commands.Bot):
             
         )
         
-        tz  = pytz.timezone("Asia/Tokyo")
-        now = datetime.now(tz)
         
         # ---------- 開発モードだけテスト用ジョブを追加 ----------
         if CONFIG.get("ENV") == "development":
