@@ -10,5 +10,6 @@ CONFIG = {
     "EXCLUDE_USERS": [
         int(os.getenv("EXCLUDE_USER1")),
         int(os.getenv("EXCLUDE_USER2"))
-    ]
+    ],
+    "ENV": "development"
 }
