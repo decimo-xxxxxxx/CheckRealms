@@ -72,10 +72,11 @@ async def send_monthly_messages(bot):
         
 async def check_reminders(bot,delta_days: int = 1):
     #日次チェック。締切日と締切翌日に未回答ユーザーにリマインドを送る。
+    
     today = datetime.now(pytz.timezone('Asia/Tokyo'))
     deadline = get_last_day_of_month()
 
-    if today.date() == deadline.date() or today.date() == (deadline + timedelta(days=delta_days)):
+    if today == deadline or today == (deadline + timedelta(days=delta_days)):
         for user_id in storage.get_unresponded_users():
             user = await bot.fetch_user(user_id)
             if user:
