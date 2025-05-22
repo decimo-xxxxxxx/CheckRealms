@@ -17,7 +17,8 @@ def get_last_monday_of_month():
 def get_last_day_of_month():
     """今月の月末日を datetime.date で返す"""
     now = datetime.now(pytz.timezone('Asia/Tokyo'))
-    last_day = now + relativedelta(day=31)
+    #last_day = now + relativedelta(day=31)
+    last_day = now + timedelta(day=2)
     return last_day.date()
 
 async def send_initial_message(bot, user):
@@ -30,7 +31,7 @@ async def send_initial_message(bot, user):
             description="以下のリアクションで回答してください：\n\n⭕ Yes\n❌ No",
             color=0x00ff00
         )
-        embed.set_footer(text=f"回答期限:本日 ~ {endday.strftime('%m/%d')} 23:59 JST")
+        embed.set_footer(text=f"回答期限: {startday.strftime('%m/%d')} ~ {endday.strftime('%m/%d')} 23:59")
         message = await user.send(embed=embed)
         await message.add_reaction("⭕")
         await message.add_reaction("❌")

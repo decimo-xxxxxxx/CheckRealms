@@ -85,22 +85,6 @@ class RealmBot(commands.Bot):
                 m for m in channel.members
                 if m.id not in CONFIG["EXCLUDE_USERS"] and not m.bot
             ]
-            # 全メンバーを未回答ユーザーとして登録
-            for m in members:
-                storage.responses[m.id] = {
-                    "reaction": None,
-                    "last_updated": None,
-                    "month": get_last_monday_of_month().month
-                }
-            # ── ここから追加 ──
-            # 起動後1分で全員に直接 send_reminder をテスト
-            for idx, m in enumerate(members):
-                self.scheduler.add_job(
-                    send_reminder,
-                    trigger=DateTrigger(run_date=now + timedelta(minutes=1 + idx)),
-                    args=[self, m],
-                    id=f"dev_direct_remind_{m.id}"
-                )
 
             # ── 追加ここまで ──
 
