@@ -53,11 +53,10 @@ class RealmBot(commands.Bot):
         self.scheduler.add_job(
             send_monthly_messages,
             trigger=CronTrigger(
-                run_date=now + timedelta(minutes=1)
-                #day='last mon',
-                #hour=9,
-                #minute=0,
-                #timezone='Asia/Tokyo'
+                day='last mon',
+                hour=9,
+                minute=0,
+                timezone='Asia/Tokyo'
             ),
             args=[self],
         )

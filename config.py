@@ -11,5 +11,5 @@ CONFIG = {
         int(os.getenv("EXCLUDE_USER1")),
         int(os.getenv("EXCLUDE_USER2"))
     ],
-    "ENV": "production"
+    "ENV": os.getenv("ENV")
 }

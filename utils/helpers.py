@@ -17,14 +17,12 @@ def get_last_monday_of_month():
 def get_last_day_of_month():
     """今月の月末日を datetime.date で返す"""
     now = datetime.now(pytz.timezone('Asia/Tokyo'))
-    #last_day = now + relativedelta(day=31)
-    last_day = now + relativedelta(day=2)
+    last_day = now + relativedelta(day=31)
     return last_day.date()
 
 async def send_initial_message(bot, user):
     try:
-        #startday = get_last_monday_of_month()
-        startday = datetime.now(pytz.timezone('Asia/Tokyo'))
+        startday = get_last_monday_of_month()
         endday = get_last_day_of_month()
         
         embed = discord.Embed(
@@ -75,7 +73,6 @@ async def send_monthly_messages(bot):
 async def check_reminders(bot,delta_days: int = 1):
     #日次チェック。締切日と締切翌日に未回答ユーザーにリマインドを送る。
     today = datetime.now(pytz.timezone('Asia/Tokyo'))
-    #deadline = get_last_day_of_month()
     deadline = get_last_day_of_month()
 
     if today.date() == deadline.date() or today.date() == (deadline + timedelta(days=delta_days)):
